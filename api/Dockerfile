@@ -14,7 +14,7 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-RUN go build -ldflags="-s -w" -o /app/fire api/fire.go
+RUN go build -ldflags="-s -w" -o /app/game api/game.go
 
 
 FROM scratch
@@ -24,7 +24,7 @@ COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/S
 ENV TZ Asia/Shanghai
 
 WORKDIR /app
-COPY --from=builder /app/fire /app/fire
+COPY --from=builder /app/game /app/game
 COPY --from=builder /app/etc /app/etc
 
 CMD ["./game", "-f", "etc/game.yaml"]
