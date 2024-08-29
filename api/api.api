@@ -1,0 +1,16 @@
+syntax = "v1"
+
+import (
+	"room.api"
+	"user.api"
+	"ws.api"
+)
+
+info (
+	title:   "游戏"
+	desc:    "游戏"
+	author:  "cqmike"
+	email:   "cqmike0315@gmail.com"
+	version: "1.0.0"
+)
+

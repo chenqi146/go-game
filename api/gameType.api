@@ -1,0 +1,32 @@
+syntax = "v1"
+
+
+type (
+    User {
+        UserId int64 `json:"userId"`
+        Nickname string `json:"nickname"`
+        Avatar string `json:"avatar"`
+    }
+
+    Room {
+        RoomId int64 `json:"roomId"`
+        PlayerNum int64 `json:"playerNum"`
+        UndercoverNum int64 `json:"undercoverNum"`
+        CivilianNum int64 `json:"civilianNum"`
+        HomeOwnersUserId int64 `json:"homeOwnersUserId"`
+        Status int64 `json:"status"`
+        Users []User `json:"users"`
+        Game GameInfo `json:"game"`
+    }
+
+
+    GameInfo {
+        GameId int64 `json:"gameId"`
+        UndercoverWord string `json:"undercoverWord"`
+        CivilianWord string `json:"civilianWord"`
+        undercoverUserIds []int64 `json:"undercoverUserIds"`
+        civilianUserIds []int64 `json:"civilianUserIds"`
+        // 淘汰玩家
+        eliminatedUserIds []int64 `json:"eliminatedUserIds"`
+    }
+)

@@ -1,0 +1,53 @@
+syntax = "v1"
+
+info(
+    title: "房间"
+    desc: "房间"
+    author: "cqmike"
+    email: "cqmike0315@gmail.com"
+    version: "1.0.0"
+)
+
+type (
+    CreateUserReq {
+        Nickname string `json:"nickname"`
+        Avatar string `json:"avatar"`
+    }
+
+    CreateUserResp {
+        UserId int64 `json:"userId"`
+    }
+
+    UpdateUserReq {
+        Nickname string `json:"nickname"`
+    }
+
+    UpdateUserResp {
+    }
+
+    QueryUserReq {
+        UserId int64 `json:"userId"`
+    }
+
+    QueryUserResp {
+        UserId int64 `json:"userId"`
+        Nickname string `json:"nickname"`
+        Avatar string `json:"avatar"`
+    }
+)
+
+@server(
+    prefix:  /api/v1
+    group: user
+    timeout: 30s
+)
+service Game {
+    @handler CreateUserHandler
+    post /user/create (CreateUserReq) returns (CreateUserResp)
+
+    @handler UpdateUserHandler
+    post /user/update (UpdateUserReq) returns (UpdateUserResp)
+
+    @handler QueryUserHandler
+    post /user/query (QueryUserReq) returns (QueryUserResp)
+}

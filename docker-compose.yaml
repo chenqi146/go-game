@@ -1,0 +1,16 @@
+version: '3'
+services:
+  fire-rpc:
+    image: "${DOCKER_REPOSITORY_URL}/cqmike/game:${VERSION}"
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - $PWD/conf/:/app/etc/
+    networks:
+      - base-net
+
+
+networks:
+  base-net:
+    external: true

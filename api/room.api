@@ -1,0 +1,103 @@
+syntax = "v1"
+
+import (
+    "gameType.api"
+)
+
+info(
+    title: "房间"
+    desc: "房间"
+    author: "cqmike"
+    email: "cqmike0315@gmail.com"
+    version: "1.0.0"
+)
+
+type (
+    CreateRoomReq {
+        PlayerNum int64 `json:"playerNum"`
+        // 卧底数量
+        UndercoverNum int64 `json:"undercoverNum"`
+        // 平民数量
+        CivilianNum int64 `json:"civilianNum"`
+    }
+
+    CreateRoomResp {
+        RoomId int64 `json:"roomId"`
+    }
+
+    JoinRoomReq {
+        RoomId int64 `json:"roomId"`
+    }
+    JoinRoomResp {
+    }
+
+    RoomInfoReq {
+        RoomId int64 `json:"roomId"`
+    }
+
+    RoomInfoResp {
+        Room
+    }
+
+    StartGameReq {
+        RoomId int64 `json:"roomId"`
+    }
+    StartGameResp {
+        GameId int64 `json:"gameId"`
+        undercoverWord string `json:"undercoverWord"`
+        civilianWord string `json:"civilianWord"`
+        undercoverUserIds []int64 `json:"undercoverUserIds"`
+        civilianUserIds []int64 `json:"civilianUserIds"`
+    }
+
+    EliminateUserReq {
+        RoomId int64 `json:"roomId"`
+        UserId int64 `json:"userId"`
+    }
+
+    EliminateUserResp {
+    }
+
+    GameOverReq {
+        RoomId int64 `json:"roomId"`
+    }
+
+    GameOverResp {
+
+    }
+
+    ChangeWordReq {
+        RoomId int64 `json:"roomId"`
+    }
+
+    ChangeWordResp {
+    }
+)
+
+@server(
+    prefix:  /api/v1
+    group: room
+    timeout: 30s
+)
+service Game {
+    @handler CreateRoomHandler
+    post /room/create (CreateRoomReq) returns (CreateRoomResp)
+
+    @handler JoinRoomHandler
+    post /room/join (JoinRoomReq) returns (JoinRoomResp)
+
+    @handler RoomInfoHandler
+    post /room/info (RoomInfoReq) returns (RoomInfoResp)
+
+    @handler StartGameHandler
+    post /room/startGame (StartGameReq) returns (StartGameResp)
+
+    @handler EliminateUserHandler
+    post /room/eliminateUser (EliminateUserReq) returns (EliminateUserResp)
+
+    @handler GameOverHandler
+    post /room/gameOver (GameOverReq) returns (GameOverResp)
+
+    @handler ChangeWordHandler
+    post /room/changeWord (ChangeWordReq) returns (ChangeWordResp)
+}

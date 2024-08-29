@@ -1,0 +1,24 @@
+syntax = "v1"
+
+info(
+    title: "ws"
+    desc: "ws"
+    author: "cqmike"
+    email: "cqmike0315@gmail.com"
+    version: "1.0.0"
+)
+
+type WebSocketResponse {
+}
+
+
+@server(
+    prefix:  /api/v1
+    group: ws
+    timeout: 30s
+)
+service Game {
+    @handler WebsocketHandler
+    get /ws returns (WebSocketResponse)
+
+}
