@@ -25,7 +25,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=sha256,template={{ .Digest }}
+            type=sha
             type=latest,template=latest
 
       - name: Set up QEMU
@@ -48,12 +48,12 @@ jobs:
           file: api/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-#
-#      - name: Pull and run
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.DEPLOY_HOST }}
-#          username: ${{ secrets.DEPLOY_USER }}
-#          password: ${{ secrets.DEPLOY_SECRET }}
-#          port: ${{ secrets.SSH_PORT }}
-#          script: sudo docker login --username=${{ secrets.DOCKER_REPOSITORY_USERNAME }} -p ${{ secrets.DOCKER_REPOSITORY_PASSWORD }} ccr.ccs.tencentyun.com && cd /data/game && docker-compose pull && docker-compose up -d
+
+      - name: Pull and run
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_SECRET }}
+          port: ${{ secrets.SSH_PORT }}
+          script: sudo docker login --username=${{ secrets.DOCKER_REPOSITORY_USERNAME }} -p ${{ secrets.DOCKER_REPOSITORY_PASSWORD }} ccr.ccs.tencentyun.com && cd /data/game && docker-compose pull && docker-compose up -d

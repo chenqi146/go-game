@@ -1,7 +1,7 @@
 version: '3'
 services:
-  fire-rpc:
-    image: "${DOCKER_REPOSITORY_URL}/cqmike/game:${VERSION}"
+  game:
+    image: "${DOCKER_REPOSITORY_URL}/cqmike/game:latest"
     env_file:
       - .env
     restart: always
