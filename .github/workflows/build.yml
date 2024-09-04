@@ -54,4 +54,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_SECRET }}
           port: ${{ secrets.SSH_PORT }}
-          script: sudo docker login --username=${{ secrets.DOCKER_REPOSITORY_USERNAME }} -p ${{ secrets.DOCKER_REPOSITORY_PASSWORD }} ccr.ccs.tencentyun.com && cd /data/game && docker-compose pull && docker-compose up -d
+          script: sudo docker login --username=${{ secrets.DOCKER_REPOSITORY_USERNAME }} -p ${{ secrets.DOCKER_REPOSITORY_PASSWORD }} ccr.ccs.tencentyun.com && cd /data/game && sudo docker-compose pull && sudo docker-compose up -d
